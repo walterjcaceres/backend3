@@ -10,8 +10,11 @@ export default class Pet {
         return petModel.findOne(params);
     }
 
-    save = (doc) =>{
-        return petModel.create(doc);
+    save = async (doc) =>{
+      //  return petModel.create(doc);
+      const newPet = new petModel(product);
+      await newPet.save();
+      return newPet;
     }
 
     update = (id,doc) =>{
