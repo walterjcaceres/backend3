@@ -17,8 +17,7 @@ const addUsersAndPets = async (req,res)=>{
     const users=req.query.users||0;
     const pets=req.query.pets||0;
     try {
-       
-        
+               
         const usuarios = await MockingService.generarMockingUsuarios(users);
         const mascotas = await MockingService.generarMockingMascotas(pets);
 
@@ -36,7 +35,7 @@ const addUsersAndPets = async (req,res)=>{
             await newPet.save(mascotas[i]);
         }
 
-        res.status(201).send(mascotas);
+        res.status(201).send(`${users} usuarios y ${pets} mascotas cargados exitosamente`);
     } catch (error) {
         res.status(500).send("Error del servidorr");
     }
