@@ -1,6 +1,6 @@
 import MockingService from "../services/mocking.js";
 import Pet from "../dao/Pets.dao.js";
-
+import Users from "../dao/Users.dao.js";
 
 const getMascotas = async (req,res)=>{
 
@@ -14,19 +14,26 @@ const getUsuarios = async (req,res)=>{
 }
 
 const addUsersAndPets = async (req,res)=>{
-    //const users=req.params.users;
+    const users=req.query.users||0;
+    const pets=req.query.pets||0;
     try {
-        const pets=8;
-        //const usuarios = await MockingService.generarMockingUsuarios(users);
+       
+        
+        const usuarios = await MockingService.generarMockingUsuarios(users);
         const mascotas = await MockingService.generarMockingMascotas(pets);
 
-        
+        for(let i=0;i<usuarios.length;i++){
+            console.log(usuarios[i]);
+            const newUser = new Users();
 
-        //  mascotas.map(async (mascota)=>{await Pet.save(mascota)});
+            await newUser.save(usuarios[i]);
+        }
 
         for(let i=0;i<mascotas.length;i++){
             console.log(mascotas[i]);
-            await Pet.save(mascotas[i]);
+            const newPet = new Pet();
+
+            await newPet.save(mascotas[i]);
         }
 
         res.status(201).send(mascotas);
