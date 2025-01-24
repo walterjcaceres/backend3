@@ -10,7 +10,7 @@ import mocksRouter from './routes/mocks.router.js';
 
 const app = express();
 const PORT = process.env.PORT||8080;
-const connection = mongoose.connect(`mongodb+srv://walterjcaceres:coderhouse70110@cluster0.ufccc.mongodb.net/adoptme?retryWrites=true&w=majority&appName=Cluster0`)
+const connection = mongoose.connect(process.env.MONGO_URL)
 
 app.use(express.json());
 app.use(cookieParser());
